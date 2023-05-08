@@ -1,0 +1,61 @@
+{% extends 'inner-page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <main id="main">
+
+        <section id="appointment" class="appointment">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>{{ user.first_name }} {{ user.last_name }} {% trans 'Appointments' %}</h2>
+                </div>
+
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                         aria-labelledby="pills-home-tab">
+                        <table class="table bg-white text-center">
+                            <thead>
+                            <tr class="bg-default tbl-header">
+                                <th scope="col">{% trans 'Major' %}</th>
+                                <th scope="col">{% trans 'Date' %}</th>
+                                <th scope="col">{% trans 'Time' %}</th>
+                                <th scope="col">{% trans 'Type' %}</th>
+                                <th scope="col">{% trans 'Status' %}</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for appointment in nurse_reservations %}
+                                <tr class="bg-white">
+                                    <td>{{ appointment.major }}</td>
+                                    <td>{{ appointment.date }}</td>
+                                    <td>{{ appointment.get_session_time_display }}</td>
+                                    <td><span
+                                            class="badge {% if appointment.type == 'NORMAL' %} alert-info {% else %} alert-danger {% endif %}">{{ appointment.type }}</span>
+                                    </td>
+
+                                    <td><span class="badge {% if appointment.status == 'BOOKED' %}alert-warning
+                        {% elif appointment.status == 'APPROVED' %}alert-success{% endif %} rounded-pill"><i
+                                            class="fa fa-circle mr-2"></i>{{ appointment.get_status_display }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </section><!-- End Appointment Section -->
+
+
+    </main><!-- End #main -->
+
+{% endblock %}

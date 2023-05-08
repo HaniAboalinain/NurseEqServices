@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {{ block.super }}
+{% endblock %}
+
+{% block favicon %}
+    <link href="{% static "img/favicon.png" %}" rel="icon">
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+{% endblock %}
+
+{% block styles %}
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+
+    {% if LANGUAGE_CODE == 'ar' %}
+        <link href="{% static 'css/rtl/bootstrap-rtl.css' %}" rel="stylesheet">
+        <link href="{% static 'css/rtl/custom_style_ar.css' %}" rel="stylesheet">
+    {% endif %}
+    <link href="{% static 'css/custom_style.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block extra_head %}
+{% endblock %}
+
+
+{% block header %}
+    {% include 'partials/topbar.html' %}
+    {% include 'partials/header.html' %}
+{% endblock %}
+
+
+{% block content %}
+    {% if messages %}
+        <div class="container alert-container">
+            {% for message in messages %}
+                <div class="messages d-flex justify-content-between align-items-center alert w-75
+                                {% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
+                    <strong>
+                        {{ message }}
+                    </strong>
+                    <a class="close dismiss-alert-btn" data-dismiss="alert" aria-label="Close">
+                        <span class="text-gray" aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'partials/footer.html' %}
+{% endblock %}
+
+{% block loader %}
+    {% include 'partials/loader.html' %}
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{% static 'vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'vendor/purecounter/purecounter.js' %}"></script>
+    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom_js.js' %}"></script>
+
+{% endblock %}
+
+{% block extrascritps %}
+    <script>
+        $(function () {
+            $('.nav-link').removeClass('active');
+            $('a[href="{{ request.path }}"]').addClass('active');
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'inner-page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block inner_content %}
+
+    <div class="container p-2">
+        <div class="row">
+
+            <div class="col-12 d-flex justify-content-end mt-4">
+                <a href="{% url 'user-update-info' object.pk %}" class="text-primary p-2">
+                    <i class="fas fa-edit mr-1"></i>
+                    {% trans 'Edit your information' %}
+                </a>
+            </div>
+
+            <div class="col-12">
+                <div class="card p-3 mb-3">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 text-center mb-3">
+                            <img src="{% static 'img/no-user.png' %}" width="50%" height="200">
+{#                            <a href="{% url 'user-update-info' object.pk %}" class="text-primary p-2">#}
+{#                                <i class="fas fa-edit mr-1"></i>#}
+{#                                {% trans 'Edit your information' %}#}
+{#                            </a>#}
+                        </div>
+
+                        <div class="col-lg-8 col-md-12">
+
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th scope="row">{% trans "User name" %}: &nbsp;</th>
+                                    <td>{{ object.username }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{% trans "Full name" %}: &nbsp;</th>
+                                    <td>{{ object.get_full_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{% trans "Age" %}: &nbsp;</th>
+                                    <td>{{ object.clac_age }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{% trans "E-mail" %}: &nbsp;</th>
+                                    <td>{{ object.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{% trans "Phone Number" %}: &nbsp;</th>
+                                    <td>{{ object.phone }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+{#                        <hr>#}
+{#                        <div class="d-flex justify-content-end">#}
+{#                            <a href="{% url 'user-update-info' object.pk %}" class="text-primary p-2">#}
+{#                                <i class="fas fa-edit mr-1"></i>#}
+{#                                {% trans 'Edit your information' %}#}
+{#                            </a>#}
+{#                        </div>#}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

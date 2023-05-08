@@ -1,0 +1,38 @@
+{% extends 'inner-page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block inner_content %}
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services services">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Services</h2>
+                <p>You can view and benefit from the services provided through our website.</p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="icon"><i class="fas fa-hospital-user"></i></div>
+                    <h4 class="title"><a href="">Emergency Appointment</a></h4>
+                    <p class="description">In an emergency, you can request the home nurse service, and the nurse will respond to the request as soon as possible</p>
+                </div>
+                <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="icon"><i class="fas fa-notes-medical"></i></div>
+                    <h4 class="title"><a href="">Nurse Appointment</a></h4>
+                    <p class="description">In the case of a scheduled request, you can request the home nurse service, and the specialized nurse will fulfill the request as soon as possible</p>
+                </div>
+                <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="icon"><i class="fas fa-wheelchair"></i></div>
+                    <h4 class="title"><a href="">Equipment reservation</a></h4>
+                    <p class="description">You can reserve medical equipment needed to serve patients</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Services Section -->
+
+{% endblock %}

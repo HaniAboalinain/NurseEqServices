@@ -1,0 +1,55 @@
+{% extends 'inner-page.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% trans 'Appointemt' %}
+{% endblock %}
+
+{% block breadcrumbs_title %}
+    {% trans 'Appointemt' %}
+{% endblock %}
+
+{% block breadcrumbs_text %}
+    {% trans 'Appointemt' %}
+{% endblock %}
+
+{% block inner_content %}
+
+    <!-- ======= Appointment Section ======= -->
+
+    <section id="appointment" class="appointment">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <div class="alert alert-danger text-center mt-3" role="alert">
+                    <h4 class="alert-heading">Emergency Appointment Case !!</h4>
+                    <p>
+                        Aww yeah, you successfully read this important alert message. This example text is going to run
+                        a bit
+                        longer
+                        so that you can see how spacing within an alert works with this kind of content.
+                    </p>
+                    <hr>
+                    <p class="mb-0">
+
+                        Whenever you need to, be sure to use margin utilities to keep things nice and tidy.
+
+                    </p>
+                </div>
+
+
+            </div>
+
+            <form action="" method="post" role="form" data-aos="fade-up" data-aos-delay="100">
+                <div class="row">
+
+                    {% csrf_token %}
+                    {% crispy form %}
+                </div>
+            </form>
+        </div>
+    </section><!-- End Appointment Section -->
+
+{% endblock %}

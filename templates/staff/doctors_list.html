@@ -1,0 +1,50 @@
+{% extends 'inner-page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block inner_content %}
+    <section id="doctors" class="doctors section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>Nurses</h2>
+                <p>Our team includes a distinguished group of professional nurses, you can view some of them here.</p>
+            </div>
+
+            <div class="row">
+
+                {% for doctor in object_list %}
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                        <div class="member" data-aos="fade-up" data-aos-delay="100">
+                            <a href="#">
+                                <div class="member-img">
+                                    <img src="
+                                            {% if doctor.photo %}
+                                                    {{ doctor.photo.url }}
+                                            {% else %}
+                                                   {% static 'img/no-user.png' %}
+                                            {% endif %}"
+                                         class="img-fluid" alt="Doctor photo">
+                                    <div class="social">
+                                        <a href=""><i class="bi bi-twitter"></i></a>
+                                        <a href=""><i class="bi bi-facebook"></i></a>
+                                        <a href=""><i class="bi bi-instagram"></i></a>
+                                        <a href=""><i class="bi bi-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="{% url 'doctor-details' doctor.id %}">
+                                <div class="member-info">
+                                    <h4>{{ doctor.user.get_full_name }}</h4>
+                                    <span>{{ doctor.major }}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </section><!-- End Doctors Section -->
+
+{% endblock %}

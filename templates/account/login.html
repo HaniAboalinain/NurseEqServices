@@ -1,0 +1,49 @@
+{% extends "inner-page.html" %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{#{% load account socialaccount %}#}
+
+{% block title %}
+    {% trans 'Signin' %}
+{% endblock %}
+
+{% block breadcrumbs_title %}
+    {% trans 'Signin' %}
+{% endblock %}
+
+{% block breadcrumbs_text %}
+    {% trans 'Signin' %}
+{% endblock %}
+
+{% block inner_content %}
+    <section class="site-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-wrap">
+                        {#                        <h2 class="mb-5">{% trans "Sign-in" %}</h2>#}
+                        <form class="login" method="POST" action="{% url 'account_login' %}">
+                            {% csrf_token %}
+                            <div>
+                                {% crispy form %}
+                                {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}"
+                                           value="{{ redirect_field_value }}"/>
+                                {% endif %}
+                                <button class="primaryAction btn btn-primary mt-2 mb-2"
+                                        type="submit">{% trans "Sign In" %}</button>
+                                <a class="btn btn-danger button secondaryAction mt-2 mb-2"
+                                   href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+                            </div>
+                        </form>
+                        <p>{% blocktrans %}If you have not created an account yet, then please
+                            <a href="{{ signup_url }}">Sign Up</a> first.{% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+{% endblock %}

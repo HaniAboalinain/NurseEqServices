@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block styles %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+     {{ block.super }}
+
+    {% include 'partials/home.html' %}
+    <main id="main">
+{#        {% include 'partials/featured-services.html' %}#}
+{#        {% include 'partials/cta.html' %}#}
+{#        {% include 'partials/about.html' %}#}
+{#        {% include 'partials/count.html' %}#}
+{#        {% include 'partials/features.html' %}#}
+{#        {% include 'partials/services.html' %}#}
+        {#        {% include 'partials/create_appointment.html' %}#}
+{#        {% include 'partials/departments.html' %}#}
+{#        {% include 'partials/testimonials.html' %}#}
+{#        {% include 'partials/doctors.html' %}#}
+{#        {% include 'partials/gallery.html' %}#}
+{#        {% include 'partials/pricing.html' %}#}
+{#        {% include 'partials/faq.html' %}#}
+{#        {% include 'partials/contact.html' %}#}
+    </main><!-- End #main -->
+{% endblock %}
+

@@ -1,0 +1,7 @@
+django==3.0
+django-allauth
+django-crispy-forms
+pillow==8.0
+psycopg2-binary
+django-environ
+django-widget-tweaks

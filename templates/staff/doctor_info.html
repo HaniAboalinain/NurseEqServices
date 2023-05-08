@@ -1,0 +1,62 @@
+{% extends 'inner-page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block inner_content %}
+
+    <div class="container p-2">
+        <div class="row">
+
+{#            <div class="col-12 d-flex justify-content-end mt-4">#}
+{#                <a href="{% url 'user-update-info' object.pk %}" class="text-primary p-2">#}
+{#                    <i class="fas fa-edit mr-1"></i>#}
+{#                    {% trans 'Edit your information' %}#}
+{#                </a>#}
+{#            </div>#}
+
+            <div class="col-12">
+                <div class="card p-3 mb-3">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 text-center mb-3">
+                            <img src="{{ object.photo.url }}" width="50%" height="200">
+                        </div>
+
+                        <div class="col-lg-8 col-md-12">
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th scope="row">{% trans "Full name" %}: &nbsp;</th>
+                                    <td>{{ object.user.get_full_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{% trans "E-mail" %}: &nbsp;</th>
+                                    <td>{{ object.user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{% trans "Phone Number" %}: &nbsp;</th>
+                                    <td>{{ object.user.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{% trans "Major" %}: &nbsp;</th>
+                                    <td>{{ object.major }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">{% trans "Years of experiance" %}: &nbsp;</th>
+                                    <td>{{ object.exp_year }}</td>
+                                </tr>
+                                 <tr>
+                                    <th scope="row">{% trans "BIO" %}: &nbsp;</th>
+                                    <td>{{ object.bio }}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

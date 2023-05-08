@@ -1,0 +1,51 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+
+<html lang="{{ LANGUAGE_CODE|default:"en" }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>
+        {% block title %}
+           Index
+        {% endblock %}
+    </title>
+    {% block favicon %}
+    {% endblock %}
+
+    {# Block where global CSS will go. #}
+    {% block styles %}{% endblock %}
+
+    {% block extra_head %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block loader %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
+
+{% block extrascritps %}
+{% endblock %}
+
+</body>
+
+</html>

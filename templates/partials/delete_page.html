@@ -1,0 +1,23 @@
+{% extends 'inner-page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block inner_content %}
+    <section id="appointment" class="appointment">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>{% trans 'Delete this record' %}</h2>
+
+
+            <form method="post">{% csrf_token %}
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+                {{ form }}
+                <input class="btn btn-danger mt-5" type="submit" value="Confirm">
+            </form>
+        </div>
+            </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "inner-page.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+
+{% block inner_content %}
+    <section class="site-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-wrap">
+                        {#                        <h2 class="mb-5">{% trans "Sign-in" %}</h2>#}
+                        <form class="edit_user_info" method="POST">
+                            {% csrf_token %}
+                            <div>
+                                {% crispy form %}
+                                <button class="primaryAction btn btn-primary mt-2 mb-2"
+                                        type="submit">{% trans "Save" %}</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+{% endblock %}

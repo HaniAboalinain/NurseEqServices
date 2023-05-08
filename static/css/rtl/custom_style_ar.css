@@ -1,0 +1,13 @@
+.carousel-control-prev {
+    right: 95%;
+}
+
+.departments .nav-link {
+    border-right: 5px solid #fff;
+    /*border-left: 0;*/
+}
+
+.departments .nav-link.active {
+    background: #f7fcfc;
+    border-color: #3fbbc0!important;
+}

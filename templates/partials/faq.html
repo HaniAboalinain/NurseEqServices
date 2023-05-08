@@ -1,0 +1,72 @@
+{% load static %}
+{% load i18n %}
+ <!-- ======= Frequently Asked Questioins Section ======= -->
+        <section id="faq" class="faq section-bg">
+            <div class="container" data-aos="fade-up">
+
+                <div class="section-title">
+                    <h2>Frequently Asked Questioins</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.
+                        Sit sint
+                        consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+                        Quia
+                        fugiat sit in iste officiis commodi quidem hic quas.</p>
+                </div>
+
+                <ul class="faq-list">
+
+                    <li>
+                        <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{% trans 'What should I expect during my first speech therapy session?' %} <i class="bi bi-chevron-down icon-show"></i><i
+                                    class="bi bi-chevron-up icon-close"></i></div>
+                        <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                            <p>
+                               {% trans 'During your first speech therapy session, our therapist will first assess and understand your medical history, assess your present condition and develop a personalised treatment plan to meet your needs.' %}
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">{% trans 'Can I schedule speech therapy sessions during weekends?' %} <i class="bi bi-chevron-down icon-show"></i><i
+                                    class="bi bi-chevron-up icon-close"></i></div>
+                        <div id="faq2" class="collapse" data-bs-parent=".faq-list">
+                            <p>
+                               {% trans 'Currently, speech therapy sessions are only available from Monday to Friday.' %}
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">{% trans 'Should I prepare anything for my speech therapy session?' %} <i
+                                    class="bi bi-chevron-down icon-show"></i><i
+                                    class="bi bi-chevron-up icon-close"></i></div>
+                        <div id="faq3" class="collapse" data-bs-parent=".faq-list">
+                            <p>
+                                {% trans 'There is no need for any preparation. If you have any doctor’s referral letter, previous therapy/ medical reports or investigations (X-ray or MRI), we would recommend sharing this information with your speech therapist for a more thorough understanding of your condition for treatment.' %}
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">{% trans 'How many speech therapy sessions will I need?' %} <i class="bi bi-chevron-down icon-show"></i><i
+                                    class="bi bi-chevron-up icon-close"></i></div>
+                        <div id="faq4" class="collapse" data-bs-parent=".faq-list">
+                            <p>
+                                {% trans 'Every individual’s recovery and rehabilitation journey is different. The speech therapist will be able to advise you of an appropriate treatment plan and frequency after the initial assessment.' %}
+                            </p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">{% trans 'What is the duration of a speech therapy session?' %} <i class="bi bi-chevron-down icon-show"></i><i
+                                    class="bi bi-chevron-up icon-close"></i></div>
+                        <div id="faq5" class="collapse" data-bs-parent=".faq-list">
+                            <p>
+                                {% trans 'The duration of an in-home speech therapy visit will be 50 minutes: 45 minutes of therapy + 5 minutes feedback session' %}
+                            </p>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+        </section><!-- End Frequently Asked Questioins Section -->

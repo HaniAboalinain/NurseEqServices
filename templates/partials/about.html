@@ -1,0 +1,42 @@
+{% extends 'inner-page.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block inner_content %}
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p>We provide the best healthcare services in Jordan, we provide all kinds of home health care for the elderly and Alzheimer's patients, etc. nurses and equipment team provide everything it contains and expresses in home care and rental of medical equipment.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <img src="{% static 'img/about1.png' %}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+                    <h3>WHY DID YOU CHOOSE US</h3>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> A specialized medical team and staff.
+                        </li>
+                        <li><i class="bi bi-check-circle"></i> We provide medical equipment rental services.
+                        </li>
+                        <li><i class="bi bi-check-circle"></i> Hourly home visit service
+                        </li>
+                        <li><i class="bi bi-check-circle"></i> Punctuality
+                        </li>
+                    </ul>
+
+                        <br>
+                    <div class="alert alert-primary" role="alert">
+                        You are a Nurse? Click here to <a href="{% url 'nurse-request' %}">Join us</a>
+                    </div>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Us Section -->
+{% endblock %}

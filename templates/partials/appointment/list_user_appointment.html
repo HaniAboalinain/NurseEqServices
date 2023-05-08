@@ -1,0 +1,160 @@
+{% extends "inner-page.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+
+
+{% block title %}
+    {% trans 'Appointemts List' %}
+{% endblock %}
+
+{% block breadcrumbs_title %}
+    {% trans 'Appointemts List' %}
+{% endblock %}
+
+{% block breadcrumbs_text %}
+    {% trans 'Appointemts List' %}
+{% endblock %}
+
+
+
+{% block inner_content %}
+
+    <!-- ======= Appointment Section ======= -->
+
+    <section id="appointment" class="appointment">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>{{ user.first_name }} {{ user.last_name }} {% trans 'Appointments' %}</h2>
+            </div>
+
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home"
+                            type="button" role="tab" aria-controls="pills-home"
+                            aria-selected="true">{% trans 'My Appointments' %}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-toggle="pill" data-target="#pills-profile"
+                            type="button" role="tab" aria-controls="pills-profile"
+                            aria-selected="false">{% trans 'My Equipement Reservations' %}
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-contact-tab" data-toggle="pill" data-target="#pills-contact"
+                            type="button" role="tab" aria-controls="pills-contact"
+                            aria-selected="false">{% trans 'My Emargeny Appointments' %}
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <table class="table bg-white text-center">
+                        <thead>
+                        <tr class="bg-default tbl-header">
+                            <th scope="col">{% trans 'Major' %}</th>
+                            <th scope="col">{% trans 'Date' %}</th>
+                            <th scope="col">{% trans 'Time' %}</th>
+                            <th scope="col">{% trans 'Status' %}</th>
+                            <th scope="col">{% trans 'Edit' %}</th>
+                            <th scope="col">{% trans 'Cancel' %}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for appointment in appointment %}
+                            {% if appointment.type == 'NORMAL' %}
+                            <tr class="bg-white">
+                                <td>{{ appointment.major }}</td>
+                                <td>{{ appointment.date }}</td>
+                                <td>{{ appointment.get_session_time_display }}</td>
+                                <td><span class="badge {% if appointment.status == 'BOOKED' %}alert-warning
+                        {% elif appointment.status == 'DONE' %}alert-info{% endif %} rounded-pill"><i
+                                        class="fa fa-circle mr-2"></i>{{ appointment.get_status_display }}</span></td>
+                                <td><a href="{% url 'user-update-appointment' appointment.id %} "><i
+                                        class="fa fa-edit "></i></a></td>
+                                <td><a href="{% url 'delete-page' appointment.id %}"><i class="fa fa-trash text-danger"></i></a></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                    <table class="table bg-white text-center">
+                        <thead>
+                        <tr class="bg-default tbl-header">
+                            <th scope="col">{% trans 'Equipment' %}</th>
+                            <th scope="col">{% trans 'Count' %}</th>
+                            <th scope="col">{% trans 'city' %}</th>
+                            <th scope="col">{% trans 'Address' %}</th>
+                            <th scope="col">{% trans 'Duration From' %}</th>
+                            <th scope="col">{% trans 'Duration To' %}</th>
+                            <th scope="col">{% trans 'Delivery Way' %}</th>
+                            <th scope="col">{% trans 'Total Price' %}</th>
+                            <th scope="col">{% trans 'Edit' %}</th>
+                            <th scope="col">{% trans 'Delete' %}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for reservation in eq_reservation %}
+                            <tr class="bg-white">
+                                <td>{{ reservation.eq_name }}</td>
+                                <td>{{ reservation.eq_count }}</td>
+                                <td>{{ reservation.city }}</td>
+                                <td>{{ reservation.address }}</td>
+                                <td>{{ reservation.duration_from }}</td>
+                                <td>{{ reservation.duration_to }}</td>
+                                <td>{{ reservation.delivery_way }}</td>
+                                <td>{{ reservation.price }}</td>
+
+                                <td><a href="{% url 'edit-eq-reservation' reservation.id %} "><i class="fa fa-edit "></i></a></td>
+                                <td><a href="{% url 'delete-eq-reservation' reservation.id %}"><i class="fa fa-trash text-danger"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                   <table class="table bg-white text-center">
+                        <thead>
+                        <tr class="bg-default tbl-header">
+                            <th scope="col">{% trans 'Doctor' %}</th>
+                            <th scope="col">{% trans 'Date' %}</th>
+                            <th scope="col">{% trans 'Time' %}</th>
+                            <th scope="col">{% trans 'Status' %}</th>
+                            <th scope="col">{% trans 'Cancel' %}</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for appointment in appointment %}
+                            {% if appointment.type == 'EMERGENCY' %}
+                            <tr class="bg-white">
+                                <td>{{ appointment.doctor }}</td>
+                                <td>{{ appointment.date }}</td>
+                                <td>{{ appointment.get_session_time_display }}</td>
+                                <td><span class="badge {% if appointment.status == 'APPROVED' %}alert-success
+                        {% elif appointment.status == 'DONE' %}alert-info{% endif %} rounded-pill"><i
+                                        class="fa fa-circle mr-2"></i>{{ appointment.get_status_display }}</span></td>
+
+                                <td><a href="{% url 'delete-page' appointment.id %}"><i class="fa fa-trash text-danger"></i></a></td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </section><!-- End Appointment Section -->
+
+{% endblock %}
+
+
