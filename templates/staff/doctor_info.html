@@ -1,24 +1,51 @@
 {% extends 'inner-page.html' %}
 {% load static %}
 {% load i18n %}
-
+{% load ratings %}
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+{% endblock %}
 {% block inner_content %}
 
     <div class="container p-2">
         <div class="row">
 
-{#            <div class="col-12 d-flex justify-content-end mt-4">#}
-{#                <a href="{% url 'user-update-info' object.pk %}" class="text-primary p-2">#}
-{#                    <i class="fas fa-edit mr-1"></i>#}
-{#                    {% trans 'Edit your information' %}#}
-{#                </a>#}
-{#            </div>#}
+            {#            <div class="col-12 d-flex justify-content-end mt-4">#}
+            {#                <a href="{% url 'user-update-info' object.pk %}" class="text-primary p-2">#}
+            {#                    <i class="fas fa-edit mr-1"></i>#}
+            {#                    {% trans 'Edit your information' %}#}
+            {#                </a>#}
+            {#            </div>#}
 
             <div class="col-12">
                 <div class="card p-3 mb-3">
                     <div class="row">
                         <div class="col-lg-4 col-md-12 text-center mb-3">
-                            <img src="{{ object.photo.url }}" width="50%" height="200">
+                            <img src="{% if object.photo %}
+                            {{ object.photo.url }}
+                                {% else %} {% static 'img/no-user.png' %}
+                            {% endif %} " width="50%" height="200">
+                            <div class="mt-5">
+                                {#                                <form method="post">#}
+                                {#                                    {% csrf_token %}#}
+                                {#                                    <div class="rating">#}
+                                {#                                        <input type="radio" id="star5" name="rate" value="5" required>#}
+                                {#                                        <label for="star5" title="5 stars"></label>#}
+                                {#                                        <input type="radio" id="star4" name="rate" value="4">#}
+                                {#                                        <label for="star4" title="4 stars"></label>#}
+                                {#                                        <input type="radio" id="star3" name="rate" value="3">#}
+                                {#                                        <label for="star3" title="3 stars"></label>#}
+                                {#                                        <input type="radio" id="star2" name="rate" value="2">#}
+                                {#                                        <label for="star2" title="2 stars"></label>#}
+                                {#                                        <input type="radio" id="star1" name="rate" value="1">#}
+                                {#                                        <label for="star1" title="1 star"></label>#}
+                                {#                                    </div>#}
+                                {#                                <button type="submit">Submit</button>#}
+                                {#                                </form>#}
+                                {% ratings object %}
+
+                            </div>
                         </div>
 
                         <div class="col-lg-8 col-md-12">
@@ -44,12 +71,18 @@
                                     <th scope="row">{% trans "Years of experiance" %}: &nbsp;</th>
                                     <td>{{ object.exp_year }}</td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <th scope="row">{% trans "BIO" %}: &nbsp;</th>
                                     <td>{{ object.bio }}</td>
                                 </tr>
+                                <tr>
+                                    <th scope="row">{% trans "Rate" %}: &nbsp;</th>
+                                    <td>
 
+                                    </td>
+                                </tr>
                                 </tbody>
+
                             </table>
                         </div>
                     </div>
@@ -58,5 +91,10 @@
 
         </div>
     </div>
+
+{% endblock %}
+{% block extrascritps %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
 {% endblock %}

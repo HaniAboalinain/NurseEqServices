@@ -6,12 +6,11 @@ from django.conf.urls.static import static
 from NurseEqServices import settings
 from django.views.i18n import set_language
 
-
 urlpatterns = [
-      path('i18n/setlang/', set_language, name='set_language'),
-      path('i18n/', include('django.conf.urls.i18n')),
-      path('admin/', admin.site.urls),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('i18n/setlang/', set_language, name='set_language'),
+                  path('i18n/', include('django.conf.urls.i18n')),
+                  path('admin/', admin.site.urls),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
     path('', include('main.urls')),
@@ -19,5 +18,6 @@ urlpatterns += i18n_patterns(
     path('user/', include('user.urls')),
     path('equipment-res/', include('equipmentReservation.urls')),
     path('accounts/', include('allauth.urls')),
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
 )
-#Mohammad@079
+# Mohammad@079

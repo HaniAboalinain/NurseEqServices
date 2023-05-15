@@ -17,7 +17,6 @@ from django.utils.translation import ugettext_lazy as _
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -28,7 +27,6 @@ SECRET_KEY = 'django-insecure-#nyiagu%_*=md&516$j7^s$knxyg*juc*l4lu^yi7m!n*c^w!2
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -49,6 +47,7 @@ INSTALLED_APPS = [
     'appointment',
     'equipment',
     'equipmentReservation',
+    'star_ratings',
 ]
 
 SITE_ID = 1
@@ -70,8 +69,6 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -106,7 +103,6 @@ TEMPLATES = [
     },
 ]
 
-
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -115,9 +111,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-
 WSGI_APPLICATION = 'NurseEqServices.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -128,7 +122,6 @@ DATABASES = {
         'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -165,7 +158,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -177,10 +169,8 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
-
 LOCALE_PATHS = (
-   os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, 'locale'),
 )
 
 # Default primary key field type
@@ -202,3 +192,7 @@ ACCOUNT_FORMS = {
 }
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# STAR_RATINGS_RATING_MODEL = 'user.Staff'
+STAR_RATINGS_CLEARABLE = True
+STAR_RATINGS_RERATE_SAME_DELETE = True
+STAR_RATINGS_RERATE = True

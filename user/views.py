@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from user.forms import UserUpdateForm, NurseRequestForm
-from user.models import CustomUser, Staff, NurseRequest
+from user.models import CustomUser, Staff, NurseRequest, Rate
 from appointment.models import Appointment
 from django.contrib import messages
 
@@ -78,4 +78,19 @@ class NurseRequestCreateView(SuccessMessageMixin, CreateView):
 class DoctorDetailView(DetailView):
     template_name = 'staff/doctor_info.html'
     model = Staff
+
+
+class RateCreateView(CreateView):
+    model = Rate
+    fields = ['rate']
+    template_name = 'staff/doctor_info.html'
+    success_url = reverse_lazy('home')  # Replace 'rate_success' with your desired success URL
+
+    def form_valid(self, form):
+        # Set the user and doctor based on the current request
+        form.instance.user = self.request.user
+        form.instance.doctor = Staff.objects.get(
+            pk=self.kwargs['doctor_id'])  # Assuming you pass 'doctor_id' as a parameter in your URL
+
+        return super().form_valid(form)
 

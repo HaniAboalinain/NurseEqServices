@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
+from django.contrib.contenttypes.fields import GenericRelation
+from star_ratings.models import Rating
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -66,6 +68,7 @@ class Staff(models.Model):  # Nurse model
     photo = models.ImageField(upload_to='media/doctor_photo', null=True, blank=True)
     exp_year = models.IntegerField(null=True, blank=True)
     city = models.CharField(max_length=255, choices=CITIES, null=True)
+    ratings = GenericRelation(Rating, related_query_name='Staff')
     # rate = models.PositiveIntegerField(null=True, blank=True, default=5,
     #                                    validators=[MaxValueValidator(5), MinValueValidator(1)])
 
