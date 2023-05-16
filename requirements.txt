@@ -6,3 +6,4 @@ psycopg2-binary
 django-environ
 django-widget-tweaks
 django-star-ratings
+python-gettext
