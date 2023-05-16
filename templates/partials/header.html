@@ -22,14 +22,14 @@
                         <li><a href="#">{% trans 'Coming Soon...' %}</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link scrollto" href="{% url 'contact-us' %}">Contact</a></li>
+                <li><a class="nav-link scrollto" href="{% url 'contact-us' %}">{% trans 'Contact' %}</a></li>
             </ul>
 
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
-        <a href="{% url 'create-emergency-appointment' %}" class="appointment-btn">Emergency
-            Appointment</a>
+        <a href="{% url 'create-emergency-appointment' %}" class="appointment-btn">
+            {% trans 'Emergency Appointment' %}</a>
         <div class="topbar-divider d-none d-sm-block"></div>
 
         <div class="nav-item dropdown no-arrow">
@@ -48,21 +48,21 @@
                     </a>
                     <a class="dropdown-item" href="{% url 'user-update-info' request.user.id %}">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Settings
+                        {% trans 'Settings' %}
                     </a>
                     <a class="dropdown-item" href="{% url 'list-user-appointment' %}">
                         <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Activity Log
+                        {% trans 'Activity Log' %}
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'account_logout' %}">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
+                        {% trans 'Logout' %}
                     </a>
                 </div>
 
             {% else %}
-                <a href="{% url 'account_login' %}" class="btn btn-secondary login-btn" role="button">Sign in</a>
+                <a href="{% url 'account_login' %}" class="btn btn-secondary login-btn" role="button">{% trans 'Sign in' %}</a>
             {% endif %}
             <!-- Dropdown - User Information -->
         </div>
