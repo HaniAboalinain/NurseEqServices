@@ -1,7 +1,7 @@
 import datetime
 from crispy_forms.helper import FormHelper
 from django import forms
-from crispy_forms.layout import Layout, Div, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Div, ButtonHolder, Submit, HTML
 from django.forms import ModelChoiceField
 from django.utils.translation import ugettext_lazy as _
 
@@ -11,7 +11,7 @@ from equipment.models import Equipment
 
 class EquipmentChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
-        return f'{obj.name}  ------------- price: {obj.price}'
+        return f'{obj.name} \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 {obj.price} JD/DAY'
 
 
 class DateInput(forms.DateInput):
@@ -43,14 +43,16 @@ class EquipmentReservationForm(forms.ModelForm):
             # Div(
             Div("eq_name", css_class="eq_name col-md-6 input-block"),
             Div("eq_count", css_class="count col-md-6 input-block"),
+            Div("duration_from", css_class="col-md-6 input-block"),
+            Div("duration_to", css_class="col-md-6 input-block"),
+            Div("address", css_class="col-md-12 input-block"),
             Div("city", css_class="col-md-6 input-block"),
-            Div("address", css_class="col-md-6 input-block"),
-            Div("duration_from", css_class="col-md-4 input-block"),
-            Div("duration_to", css_class="col-md-4 input-block"),
-            Div("delivery_way", css_class="col-md-4 input-block"),
-            Div("id_photo", css_class="col-md-4 input-block"),
+            Div("delivery_way", css_class="col-md-6 input-block"),
+            Div("id_photo", css_class="col-md-6 input-block"),
             Div("price", css_class=" price col-md-6 input-block"),
-            Div("privacy_policy", css_class="col-md-6 input-block"),
+            Div("privacy_policy", HTML(
+                '<ul><li> Policy 1 </li><li> Policy 2 </li><li> Policy 3 </li></ul>'),
+                css_class="col-md-6 input-block"),
 
             Div(ButtonHolder(Submit('submit', _('Submit'), css_class='mt-2 w-25'),
                              css_class='d-flex justify-content-center'), )
@@ -58,14 +60,21 @@ class EquipmentReservationForm(forms.ModelForm):
 
     def clean(self):
         clean = super(EquipmentReservationForm, self).clean()
-        """
-        clean['date'] = self.cleaned_data['date']
-        if clean['date'] < datetime.date.today():
-            raise forms.ValidationError("The date cannot be in the past!")
+        clean['duration_from'] = self.cleaned_data['duration_from']
+        clean['duration_to'] = self.cleaned_data['duration_to']
 
-        clean['session_time'] = self.cleaned_data['session_time']
-        if Appointment.objects.filter(date=clean['date'], session_time=clean['session_time'],
-                                      status='PENDING' or 'APPROVED' or 'UNAVAILABLE').exists():
-            raise forms.ValidationError("This time is not available, please Choose another time!")
-        """
+        if clean['duration_from'] > clean['duration_to']:
+            raise forms.ValidationError("The duration from field can't be greater than duration to!")
+
+        # clean['session_time'] = self.cleaned_data['session_time']
+        # if Appointment.objects.filter(date=clean['date'], session_time=clean['session_time'],
+        #                               status='PENDING' or 'APPROVED' or 'UNAVAILABLE').exists():
+        #     raise forms.ValidationError("This time is not available, please Choose another time!")
+
         return clean
+
+    def clean_privacy_policy(self):
+        privacy_policy = self.cleaned_data.get('privacy_policy')
+        if not privacy_policy:
+            raise forms.ValidationError(_("Please, Agree the policy before you submit the request."))
+        return privacy_policy
