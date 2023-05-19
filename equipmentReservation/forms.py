@@ -66,6 +66,11 @@ class EquipmentReservationForm(forms.ModelForm):
         if clean['duration_from'] > clean['duration_to']:
             raise forms.ValidationError("The duration from field can't be greater than duration to!")
 
+        clean['eq_count'] = self.cleaned_data['eq_count']
+        qty = Equipment.objects.get(id=self.data['eq_name']).quantity
+        if clean['eq_count'] > qty:
+            raise forms.ValidationError("The available qty in the inventory is"+" "+str(qty))
+
         # clean['session_time'] = self.cleaned_data['session_time']
         # if Appointment.objects.filter(date=clean['date'], session_time=clean['session_time'],
         #                               status='PENDING' or 'APPROVED' or 'UNAVAILABLE').exists():
