@@ -4,6 +4,7 @@ from crispy_forms.layout import Layout, Div, ButtonHolder, Submit, HTML
 from django.forms import ModelChoiceField
 from django.utils.translation import ugettext_lazy as _
 from datetime import date
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from equipmentReservation.models import EquipmentReservation, PAYMENT_METHOD
 from equipment.models import Equipment
@@ -56,6 +57,9 @@ class MonthYearField(forms.MultiValueField):
 class EquipmentReservationForm(forms.ModelForm):
     # eq_name = forms.ModelChoiceField(queryset=Equipment.objects, empty_label=_("--- Please Choose Equipment ---"))
     eq_name = EquipmentChoiceField(queryset=Equipment.objects, empty_label=_("--- Please Choose Equipment ---"))
+    eq_count = forms.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
     payment_method = forms.ChoiceField(choices=PAYMENT_METHOD, widget=forms.RadioSelect, initial='cash')
     visa_exp_date = MonthYearField()
 
@@ -116,7 +120,7 @@ class EquipmentReservationForm(forms.ModelForm):
         clean['eq_count'] = self.cleaned_data['eq_count']
         qty = Equipment.objects.get(id=self.data['eq_name']).quantity
         if clean['eq_count'] > qty:
-            raise forms.ValidationError("The available qty in the inventory is" + " " + str(qty))
+            raise forms.ValidationError("The available quantity in the inventory is" + " " + str(qty))
 
         # clean['session_time'] = self.cleaned_data['session_time']
         # if Appointment.objects.filter(date=clean['date'], session_time=clean['session_time'],
