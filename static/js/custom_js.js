@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    let x = $("input[type=radio][name=payment_method]:checked").val();
+    if (x == 'visa') {
+        $("#visa-info-section").removeClass("d-none");
+    }
+
     $("#id_eq_count, #id_eq_name, #id_duration_from, #id_duration_to").change(function () {
         // let from = new Date($('#id_duration_from').val());
         // let day = from.getDate();
@@ -22,4 +27,18 @@ $(document).ready(function () {
         let price = eq_count * selectedValue * diffDays;
         $("#id_price").val(price);
     });
+
+    $('input[type=radio][name=payment_method]').change(function () {
+        if (this.value == 'cash') {
+            // alert("Cash");
+            $("#visa-info-section").addClass("d-none");
+        }
+        if (this.value == 'visa') {
+            // alert("Visa");
+            $("#visa-info-section").removeClass("d-none");
+        }
+
+    });
+
+
 });
