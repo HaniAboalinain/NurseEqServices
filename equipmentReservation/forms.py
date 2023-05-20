@@ -105,28 +105,28 @@ class EquipmentReservationForm(forms.ModelForm):
 
         )
 
-        def clean(self):
-            clean = super(EquipmentReservationForm, self).clean()
-            clean['duration_from'] = self.cleaned_data['duration_from']
-            clean['duration_to'] = self.cleaned_data['duration_to']
+    def clean(self):
+        clean = super(EquipmentReservationForm, self).clean()
+        clean['duration_from'] = self.cleaned_data['duration_from']
+        clean['duration_to'] = self.cleaned_data['duration_to']
 
-            if clean['duration_from'] > clean['duration_to']:
-                raise forms.ValidationError("The duration from field can't be greater than duration to!")
+        if clean['duration_from'] > clean['duration_to']:
+            raise forms.ValidationError("The duration from field can't be greater than duration to!")
 
-            clean['eq_count'] = self.cleaned_data['eq_count']
-            qty = Equipment.objects.get(id=self.data['eq_name']).quantity
-            if clean['eq_count'] > qty:
-                raise forms.ValidationError("The available qty in the inventory is" + " " + str(qty))
+        clean['eq_count'] = self.cleaned_data['eq_count']
+        qty = Equipment.objects.get(id=self.data['eq_name']).quantity
+        if clean['eq_count'] > qty:
+            raise forms.ValidationError("The available qty in the inventory is" + " " + str(qty))
 
-            # clean['session_time'] = self.cleaned_data['session_time']
-            # if Appointment.objects.filter(date=clean['date'], session_time=clean['session_time'],
-            #                               status='PENDING' or 'APPROVED' or 'UNAVAILABLE').exists():
-            #     raise forms.ValidationError("This time is not available, please Choose another time!")
+        # clean['session_time'] = self.cleaned_data['session_time']
+        # if Appointment.objects.filter(date=clean['date'], session_time=clean['session_time'],
+        #                               status='PENDING' or 'APPROVED' or 'UNAVAILABLE').exists():
+        #     raise forms.ValidationError("This time is not available, please Choose another time!")
 
-            return clean
+        return clean
 
-        def clean_privacy_policy(self):
-            privacy_policy = self.cleaned_data.get('privacy_policy')
-            if not privacy_policy:
-                raise forms.ValidationError(_("Please, Agree the policy before you submit the request."))
-            return privacy_policy
+    def clean_privacy_policy(self):
+        privacy_policy = self.cleaned_data.get('privacy_policy')
+        if not privacy_policy:
+            raise forms.ValidationError(_("Please, Agree the policy before you submit the request."))
+        return privacy_policy

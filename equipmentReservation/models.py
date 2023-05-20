@@ -22,7 +22,7 @@ class EquipmentReservation(models.Model):
                                 related_name='eq_name')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='User',
                              related_name='user')
-    eq_count = models.PositiveIntegerField(null=True, blank=True, default=5,
+    eq_count = models.PositiveIntegerField(null=True, blank=True,
                                            validators=[MaxValueValidator(5), MinValueValidator(1)])
     duration_from = models.DateField()
     duration_to = models.DateField()
